@@ -16,7 +16,7 @@ pipeline {
                 }
             }
         }
-        stage('Checking Vulnerabilities') {
+        stage('Checking for Vulnerabilities') {
             steps {
                 dependencycheck additionalArguments: '--scan ./', odcInstallation: 'Dependency Checker'
                 dependencyCheckPublisher()
@@ -26,6 +26,14 @@ pipeline {
             steps {
                 sh 'mvn clean package'
             }
+        }
+        stage('Building Image') {
+            sh 'docker image build -t WebApp .'
+        }
+    }
+    post {
+        always {
+            dependencyCheckPublisher()
         }
     }
 }
