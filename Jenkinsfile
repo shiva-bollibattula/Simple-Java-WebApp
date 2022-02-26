@@ -18,8 +18,7 @@ pipeline {
         }
         stage('Checking for Vulnerabilities') {
             steps {
-                dependencycheck additionalArguments: '--scan ./', odcInstallation: 'Dependency Checker'
-                dependencyCheckPublisher()
+                dependencyCheck additionalArguments: '--scan .', odcInstallation: 'Dependency Checker'
             }
         }
         stage('Building Artifacts') {
@@ -35,7 +34,18 @@ pipeline {
     }
     post {
         always {
-            dependencyCheckPublisher()
+            dependencyCheckPublisher (
+            pattern: '',
+            failedTotalLow: 1,
+            failedTotalMedium: 1,
+            failedTotalHigh: 1,
+            failedTotalCritical: 1
+          )
+          if (currentBuild.result == 'UNSTABLE') {
+            unstable('UNSTABLE: Dependency check')
+          } else if (currentBuild.result == 'FAILURE') {
+            error('FAILED: Dependency check')
+          }
         }
     }
 }
