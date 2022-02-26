@@ -16,6 +16,12 @@ pipeline {
                 }
             }
         }
+        stage('Checking Vulnerabilities') {
+            steps {
+                dependencycheck additionalArguments: '--scan ./', odcInstallation: 'Dependency Checker'
+                dependencyCheckPublisher()
+            }
+        }
         stage('Building Artifacts') {
             steps {
                 sh 'mvn clean package'
