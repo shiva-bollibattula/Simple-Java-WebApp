@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Building Image') {
             steps {
-                sh 'docker image build -t WebApp .'
+                sh 'docker image build -t webapp .'
             }
         }
     }
