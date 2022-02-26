@@ -42,7 +42,7 @@ pipeline {
             failedTotalCritical: 1
           )
         }
-        steps {
+        script {
             if(currentBuild.result == 'UNSTABLE') {
                 unstable('UNSTABLE: Dependency check')
             } else if(currentBuild.result == 'FAILURE') {
