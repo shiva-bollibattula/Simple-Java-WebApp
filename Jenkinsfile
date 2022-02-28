@@ -87,5 +87,13 @@ pipeline {
                 }
             }
         }
+        stage('Deploying to Cluster') {
+            sh 'envsubst < application.yaml | kubectl apply -f -'
+        }
+    }
+    post {
+        always {
+            junit allowEmptyResults: true, testResults: 'target/dependency-check-report.xml'
+        }
     }
 }
