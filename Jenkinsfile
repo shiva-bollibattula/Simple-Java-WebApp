@@ -26,6 +26,25 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+        stage('Uploading Artifacts to Repository'){
+            steps {
+                nexusArtifactUploader artifacts: [
+                    [
+                        artifactId: 'webapp',
+                        classifier: '',
+                        file: 'target/webapp.war',
+                        type: 'war'
+                    ]
+                ],
+                credentialsId: 'Nexus',
+                groupId: 'com.mycompany.webapp',
+                nexusUrl: '3.111.72.154:8081',
+                nexusVersion: 'nexus3',
+                protocol: 'http',
+                repository: 'maven-snapshots',
+                version: '1.0-SNAPSHOT'
+            }
+        }
         stage('Building Image') {
             steps {
                 sh 'docker image build -t webapp .'
