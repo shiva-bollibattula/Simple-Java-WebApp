@@ -24,6 +24,8 @@ spec:
           httpGet:
             path: /
             port: 8080
+      imagePullSecrets:
+      - name: nexussecret
 ---
 apiVersion: v1
 kind: Service
