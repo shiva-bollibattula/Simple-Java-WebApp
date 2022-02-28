@@ -47,7 +47,7 @@ pipeline {
         }
         stage('Building Image') {
             steps {
-                sh 'docker image build -t webapp .'
+                sh 'docker image build -t 3.111.72.154:8083/webapp:${BUILD_ID} .'
             }
         }
         stage('Pushing Image') {
