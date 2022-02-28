@@ -26,7 +26,7 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-        stage('Uploading Artifacts'){
+        stage('Pushing Artifacts'){
             steps {
                 nexusArtifactUploader artifacts: [
                     [
@@ -48,6 +48,17 @@ pipeline {
         stage('Building Image') {
             steps {
                 sh 'docker image build -t webapp .'
+            }
+        }
+        stage('Pushing Image') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'Nexus', passwordVariable: 'password', usernameVariable: 'username')]) {
+                    sh '''
+                    docker login -u ${username} -p ${password} 3.111.72.154:8083
+                    docker push 3.111.72.154:8083/webapp:${BUILD_ID}
+                    docker rmi 3.111.72.154:8083/webapp:${BUILD_ID}
+                    '''
+                }
             }
         }
     }
