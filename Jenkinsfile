@@ -89,6 +89,7 @@ pipeline {
         stage('Deploying to Cluster') {
             steps {
                 sh 'envsubst < application.yaml | kubectl apply -f -'
+                sh 'docker rmi 3.111.72.154:8083/webapp:${BUILD_ID}'
             }
         }
     }
