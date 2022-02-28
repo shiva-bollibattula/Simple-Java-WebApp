@@ -20,12 +20,13 @@ spec:
           value: production-microservice
         # Using this as a way to avoid having to bother pushing images to registry.
         imagePullPolicy: Always
+        imagePullSecrets:
+        - name: nexussecret
         readinessProbe:
           httpGet:
             path: /
             port: 8080
-        imagePullSecrets:
-        - name: nexussecret
+        
 ---
 apiVersion: v1
 kind: Service
