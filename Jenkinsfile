@@ -82,7 +82,6 @@ pipeline {
                     sh '''
                     docker login -u ${username} -p ${password} 3.111.72.154:8083
                     docker push 3.111.72.154:8083/webapp:${BUILD_ID}
-                    docker rmi 3.111.72.154:8083/webapp:${BUILD_ID}
                     '''
                 }
             }
