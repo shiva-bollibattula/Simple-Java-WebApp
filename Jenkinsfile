@@ -1,6 +1,11 @@
 pipeline {
     agent any
     stages {
+        stage('Building Artifacts') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
         stage('Static Code Analysis') {
             steps {
                 script {
@@ -45,11 +50,6 @@ pipeline {
                         error('Dependency check: FAILED')
                     }
                 }
-            }
-        }
-        stage('Building Artifacts') {
-            steps {
-                sh 'mvn clean package'
             }
         }
         stage('Pushing Artifacts'){
