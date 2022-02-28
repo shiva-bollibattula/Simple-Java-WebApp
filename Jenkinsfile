@@ -66,22 +66,22 @@ pipeline {
         always {
             dependencyCheckPublisher (
             pattern: '',
-            failedNewCritical: 0,
-            failedNewHigh: 0,
-            failedNewLow: 0,
-            failedNewMedium: 0,
-            failedTotalCritical: 0,
-            failedTotalHigh: 0,
-            failedTotalLow: 0,
-            failedTotalMedium: 0,
-            unstableNewCritical: 0,
-            unstableNewHigh: 0,
-            unstableNewLow: 0,
-            unstableNewMedium: 0,
-            unstableTotalCritical: 0,
-            unstableTotalHigh: 0,
-            unstableTotalLow: 0,
-            unstableTotalMedium: 0
+            failedNewCritical: 1,
+            failedNewHigh: 1,
+            failedNewLow: 1,
+            failedNewMedium: 1,
+            failedTotalCritical: 1,
+            failedTotalHigh: 1,
+            failedTotalLow: 1,
+            failedTotalMedium: 1,
+            unstableNewCritical: 1,
+            unstableNewHigh: 1,
+            unstableNewLow: 1,
+            unstableNewMedium: 1,
+            unstableTotalCritical: 1,
+            unstableTotalHigh: 1,
+            unstableTotalLow: 1,
+            unstableTotalMedium: 1
           )
         script {
             if(currentBuild.result == 'UNSTABLE') {
