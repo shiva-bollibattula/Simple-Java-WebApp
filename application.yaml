@@ -25,7 +25,7 @@ spec:
             path: /
             port: 8080
       imagePullSecrets:
-        - name: my-secret
+        - name: nexus-secret
         
 ---
 apiVersion: v1
@@ -46,14 +46,3 @@ spec:
       nodePort: 30020
 
   type: NodePort
-
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: mysecret
-type: Opaque
-stringData:
-  data: |
-    username: admin
-    password: admin
