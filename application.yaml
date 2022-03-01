@@ -21,7 +21,7 @@ spec:
             path: /
             port: 8080
       imagePullSecrets:
-        - name: newsecret
+        - name: secret
 ---
 apiVersion: v1
 kind: Service
