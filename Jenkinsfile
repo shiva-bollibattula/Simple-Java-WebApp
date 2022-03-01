@@ -82,7 +82,6 @@ pipeline {
                     sh '''
                     docker login -u ${username} -p ${password} surya-aws.tk
                     docker push surya-aws.tk/webapp:${BUILD_ID}
-                    sh 'docker rmi surya-aws.tk/webapp:${BUILD_ID}'
                     '''
                 }
             }
@@ -90,13 +89,14 @@ pipeline {
         stage('Deploying to Cluster') {
             steps {
                 sh 'kubectl apply -f application.yaml'
-                cleanWs()
             }
         }
     }
     post {
         always {
-            junit allowEmptyResults: true, testResults: 'sure.xml'
+            junit allowEmptyResults: true, testResults: 'surefire.xml'
+            sh 'docker rmi surya-aws.tk/webapp:${BUILD_ID}'
+            cleanWs()
         }
     }
 }
