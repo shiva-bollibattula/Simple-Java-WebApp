@@ -82,20 +82,20 @@ pipeline {
                     sh '''
                     docker login -u ${username} -p ${password} surya-aws.tk
                     docker push surya-aws.tk/webapp:${BUILD_ID}
+                    sh 'docker rmi surya-aws.tk/webapp:${BUILD_ID}'
                     '''
                 }
             }
         }
         stage('Deploying to Cluster') {
             steps {
-                sh 'envsubst < application.yaml | kubectl apply -f -'
-                sh 'docker rmi surya-aws.tk/webapp:${BUILD_ID}'
+                sh 'kubectl apply -f application.yaml'
             }
         }
     }
     post {
         always {
-            junit allowEmptyResults: true, testResults: 'target/dependency-check-report.xml'
+            junit allowEmptyResults: true, testResults: 'sure.xml'
         }
     }
 }

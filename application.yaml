@@ -25,7 +25,7 @@ spec:
             path: /
             port: 8080
       imagePullSecrets:
-        - name: nexus-secret
+        - name: newsecret
         
 ---
 apiVersion: v1
@@ -46,3 +46,14 @@ spec:
       nodePort: 30020
 
   type: NodePort
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: newsecret
+type: kubernetes.io/dockerconfigjson
+data:
+  dockerconfigjson:
+    apiUrl: "surya-aws.tk"
+    username: admin
+    password: admin
