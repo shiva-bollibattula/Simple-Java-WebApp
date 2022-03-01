@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: surya-aws.tk/webapp:${env.BUILD_ID}
+        image: surya-aws.tk/webapp:${BUILD_ID}
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: production-microservice
@@ -26,6 +26,7 @@ spec:
             port: 8080
       imagePullSecrets:
       - name: secret
+
 ---
 apiVersion: v1
 kind: Service
