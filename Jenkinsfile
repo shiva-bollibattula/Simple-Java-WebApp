@@ -92,4 +92,10 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            sh 'docker rmi surya-aws.tk/webapp:${BUILD_ID}'
+            cleanWs()
+        }
+    }
 }
