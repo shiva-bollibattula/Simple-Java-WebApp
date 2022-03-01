@@ -90,6 +90,7 @@ pipeline {
         stage('Deploying to Cluster') {
             steps {
                 sh 'kubectl apply -f application.yaml'
+                cleanWs()
             }
         }
     }
