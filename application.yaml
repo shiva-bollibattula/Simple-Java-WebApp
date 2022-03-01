@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webapp
+data:
+  .dockerconfigjson: {"insecure-registry" : "3.111.72.154:8083"}
 spec:
   selector:
     matchLabels:
