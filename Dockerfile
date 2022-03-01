@@ -1,11 +1,11 @@
-FROM ubuntu:latest
+FROM openjdk:8u131-jdk-alpine
 
-RUN apt-get update && apt-get install -y openjdk-8-jdk
+EXPOSE 8080
 
-WORKDIR /usr/local/bin/
+WORKDIR /user/local/bin
 
-COPY target/webapp.jar .
+COPY target/webapp.jar webapp.jar
 
-#CMD ["/bin/bash"]
+ENV JAVA_OPTS="-Dspring.profiles.active=docker-demo"
 
-ENTRYPOINT ["java", "-jar", "webapp.jar"]
+CMD ["java","-Dspring.profiles.active=docker-demo", "-jar", "webapp.jar"]
