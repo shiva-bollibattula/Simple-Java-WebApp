@@ -89,7 +89,6 @@ pipeline {
         stage('Deploying to Cluster') {
             steps {
                 sh 'kubectl apply -f application.yaml'
-                sh 'docker rmi surya-aws.tk/webapp:${BUILD_ID}'
             }
         }
     }
