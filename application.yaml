@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: shivrepo/fleetman-webapp:2
+        image: 3.111.72.154:8083/webapp:${BUILD_ID}
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: production-microservice
