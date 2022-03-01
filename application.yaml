@@ -46,3 +46,15 @@ spec:
       nodePort: 30020
 
   type: NodePort
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecret
+type: Opaque
+stringData:
+  config.yaml: |
+    apiUrl: "http://3.111.72.154:8083"
+    username: admin
+    password: admin
