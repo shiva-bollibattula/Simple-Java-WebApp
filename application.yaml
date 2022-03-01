@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: surya-aws.tk/webapp:${BUILD_ID}
+        image: surya-aws.tk/webapp:${BUILD_NUMBER}
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: production-microservice
