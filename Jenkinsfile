@@ -73,15 +73,15 @@ pipeline {
         }
         stage('Building Image') {
             steps {
-                sh 'docker image build -t 3.111.72.154:8083/webapp:${BUILD_ID} .'
+                sh 'docker image build -t surya-aws.tk/webapp:${BUILD_ID} .'
             }
         }
         stage('Pushing Image') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'Nexus', passwordVariable: 'password', usernameVariable: 'username')]) {
                     sh '''
-                    docker login -u ${username} -p ${password} 3.111.72.154:8083
-                    docker push 3.111.72.154:8083/webapp:${BUILD_ID}
+                    docker login -u ${username} -p ${password} surya-aws.tk
+                    docker push surya-aws.tk/webapp:${BUILD_ID}
                     '''
                 }
             }
@@ -89,7 +89,7 @@ pipeline {
         stage('Deploying to Cluster') {
             steps {
                 sh 'envsubst < application.yaml | kubectl apply -f -'
-                sh 'docker rmi 3.111.72.154:8083/webapp:${BUILD_ID}'
+                sh 'docker rmi surya-aws.tk/webapp:${BUILD_ID}'
             }
         }
     }

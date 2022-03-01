@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: 3.111.72.154:8083/webapp:${BUILD_ID}
+        image: surya-aws.tk/webapp:${BUILD_ID}
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: production-microservice
@@ -54,7 +54,6 @@ metadata:
   name: mysecret
 type: Opaque
 stringData:
-  config.yaml: |
-    apiUrl: "http://3.111.72.154:8083"
+  data: |
     username: admin
     password: admin
