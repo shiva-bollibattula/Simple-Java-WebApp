@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 WORKDIR /opt
 
-RUN apt install wget
+RUN apt-get update && apt-get install -y wget && rm -rf /var/lib/apt/lists/*
 RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.59/bin/apache-tomcat-9.0.59.tar.gz
 RUN tar -xzvf apache-tomcat-9.0.59.tar.gz
 RUN mv apache-tomcat-9.0.59 tomcat
