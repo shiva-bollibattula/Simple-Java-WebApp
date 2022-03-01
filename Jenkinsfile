@@ -58,8 +58,8 @@ pipeline {
                     [
                         artifactId: 'webapp',
                         classifier: '',
-                        file: 'target/webapp.jar',
-                        type: 'jar'
+                        file: 'target/webapp.war',
+                        type: 'war'
                     ]
                 ],
                 credentialsId: 'Nexus',
