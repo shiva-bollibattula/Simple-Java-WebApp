@@ -53,7 +53,7 @@ metadata:
   name: newsecret
 type: kubernetes.io/dockerconfigjson
 data:
-  dockerconfigjson:
+  String.dockerconfigjson:
     apiUrl: "surya-aws.tk"
     username: admin
     password: admin
