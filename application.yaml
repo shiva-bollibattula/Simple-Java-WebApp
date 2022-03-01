@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: webapp
   replicas: 1
-  template:
+  template: # template for the pods
     metadata:
       labels:
         app: webapp
@@ -15,23 +15,31 @@ spec:
       containers:
       - name: webapp
         image: surya-aws.tk/webapp:${BUILD_ID}
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: production-microservice
+        # Using this as a way to avoid having to bother pushing images to registry.
         imagePullPolicy: Always
         readinessProbe:
           httpGet:
             path: /
             port: 8080
-      imagePullSecrets:
-        - name: secret
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: webapp
+
 spec:
+  # This defines which pods are going to be represented by this Service
+  # The service becomes a network endpoint for either other services
+  # or maybe external users to connect to (eg browser)
   selector:
     app: webapp
+
   ports:
     - name: http
       port: 8080
       nodePort: 30020
+
   type: NodePort
