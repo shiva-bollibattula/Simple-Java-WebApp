@@ -1,7 +1,11 @@
-FROM java:8
+FROM ubuntu:latest
 
-RUN curl -O http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.20/bin/apache-tomcat-8.0.20.tar.gz
-RUN tar xzf apache-tomcat-8.0.20.tar.gz
-COPY target/webapp.war apache-tomcat-8.0.20/webapps/WebApp
-EXPOSE 8080
-CMD apache-tomcat-8.0.20/bin/startup.sh && tail -f apache-tomcat-8.0.20/logs/catalina.out
+RUN apt-get update && apt-get install -y openjdk-8-jdk
+
+WORKDIR /usr/local/bin/
+
+COPY target/webapp.jar .
+
+#CMD ["/bin/bash"]
+
+ENTRYPOINT ["java", "-jar", "webapp.jar"]
