@@ -88,7 +88,7 @@ pipeline {
         }
         stage('Deploying to Cluster') {
             steps {
-                sh 'envsubst < application.yaml | kubectl apply -f -'
+                sh 'envsubst < deployment.yaml | kubectl apply -f -'
             }
         }
     }
